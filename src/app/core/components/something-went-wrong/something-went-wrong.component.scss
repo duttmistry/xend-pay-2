@@ -1,0 +1,42 @@
+.something-went-wrong-container {
+  width: 536px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 150px auto;
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    margin: 80px auto 160px;
+  }
+  img {
+    margin-bottom: 40px;
+    @media only screen and (max-width: 767px) {
+      width: 200px;
+      margin-bottom: 28px;
+    }
+  }
+  .something-went-wrong-text {
+    font-family: 'SourceSansPro';
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 47.77px;
+    margin: 0 0 18px 0;
+    color: #101828;
+    text-align: center;
+  }
+  .something-went-wrong-description {
+    width: 332px;
+    margin: 0 auto;
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.11px;
+    text-align: center;
+    font-family: 'SourceSansPro';
+    color: #667085;
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}

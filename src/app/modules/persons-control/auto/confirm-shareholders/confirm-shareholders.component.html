@@ -1,0 +1,129 @@
+<div class="main-container persons-control-container">
+  <app-title-header
+    title="{{ title }}"
+    subTitle="Please ensure all shareholders and their individual informations are correct"
+    subtitle_style="color: #667085; font-size: 16px; line-height: 24px; font-weight: 400;font-family: 'Lato', sans-serif;"
+    title_style="color: #101828; font-size: 38px; line-height: 47.77px; font-weight: 700;margin-bottom:12px;"
+    path="/persons-of-control/confirm-directors"
+  ></app-title-header>
+  <div class="confirm-shareholders confirm-proprietary">
+    <div class="confirm-shareholders-card confirm-proprietary-card">
+      <nb-card class="confirm-shareholders-account" *ngIf="isAutoFlow">
+        <nb-card-body>
+          <div
+            class="card-content confirm-shareholders-card"
+            (click)="_onAddUser()"
+            style="cursor: pointer"
+          >
+            <div class="add-container" style="cursor: pointer">
+              <div class="add-icon" style="cursor: pointer">
+                <img
+                  src="../../../../assets/images/icons/plus-blue.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="confirm-shareholders-details" style="cursor: pointer">
+              <label class="add-text" style="cursor: pointer">
+                Add shareholder</label
+              >
+              <label class="description-text" style="cursor: pointer"
+                >Share holder who own more that 10% of the business</label
+              >
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card
+        class="confirm-shareholders-accountlist"
+        *ngFor="let user of shareholderList"
+      >
+        <nb-card-body>
+          <div class="card-content edit-card-content">
+            <div class="edit-card-content-left">
+              <div class="profile-name">
+                <img *ngIf="user.profilePic" [src]="user.profilePic" />
+                <label>{{ user.altProfileText }}</label>
+              </div>
+              <div class="card-content-details">
+                <label>{{ user.firstName }} {{ " " + user.lastName }}</label>
+                <span class="cardholder-tab" *ngIf="user?.isAccountHolder">
+                  Account Holder
+                </span>
+              </div>
+            </div>
+            <div class="edit-tab">
+              <!-- <span
+                [ngStyle]="{
+                  'background-color': getColorFromStatus(
+                    user.verificationStatus
+                  ),
+                  'pointer-events':
+                    user.verificationStatus === VERIFIED_STATUS ? 'none' : ''
+                }"
+                (click)="_onVerify(user.id)"
+              >
+                {{ user.verificationStatus }}
+              </span> -->
+              <label
+                *ngIf="
+                  user.verificationStatus !== VERIFIED_STATUS && isAutoFlow
+                "
+                (click)="_onUpdateUserDetails(user)"
+                style="color: #0333d2; cursor: pointer"
+                ><img src="/assets/images/icons/Vector.png" alt="" srcset="" />
+                edit</label
+              >
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <label
+        class="Upload-details ConfirmShareholders-Upload-details"
+        *ngIf="isAutoFlow && shareholderList.length == 0"
+        >If shareholder is not an individual?
+        <a (click)="openDialog()" style="cursor: pointer"
+          >Please Contact our onboarding team</a
+        ></label
+      >
+    </div>
+    <div class="footer">
+      <div class="footer-content">
+        <button
+          nbButton
+          status="primary"
+          class="btn-next"
+          type="submit"
+          style="display: grid; width: 100%; justify-content: center"
+          (click)="_onNext()"
+        >
+          <!-- [disabled]="!allAreVerified" -->
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card class="dialog-card">
+    <!-- <nb-card-header>Template Dialog</nb-card-header> -->
+
+    <div class="dialog-card-heading">
+      <h3>Contact our onbarding team</h3>
+      <h6>Open your inbox to send an email to our team.</h6>
+    </div>
+    <div class="dialog-card-buttons">
+      <button
+        nbButton
+        (click)="ConfirmDialog()"
+        status="primary"
+        class="btn-confirm"
+      >
+        Contact
+      </button>
+      <button nbButton (click)="ref.close()" class="btn-cancel">Go back</button>
+      <!-- <nb-card-footer>
+    </nb-card-footer> -->
+    </div>
+  </nb-card>
+</ng-template>
